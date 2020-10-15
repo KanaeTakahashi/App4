@@ -10,7 +10,12 @@ namespace App4
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            //  モーダル表示の場合
+            //MainPage = new MainPage();
+
+            // モーダレス表示の場合
+            // NavigationPageのインスタンスを設定する
+            MainPage = new NavigationPage(new App4.MainPage());
         }
 
         protected override void OnStart()

@@ -20,6 +20,9 @@
             </Label.FormattedText>
         </Label>
 
+        <Button x:Name="NextPageButton"
+                Text="Bページへ"/>
+
         <Button x:Name="NextButton"
                 Text="カウントアップ" />
         <Label x:Name="lblCount"
