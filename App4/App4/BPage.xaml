@@ -22,7 +22,8 @@
                     HasZoomEnabled="True"
                     MapType="Street"
                     VerticalOptions="FillAndExpand"
-                    HorizontalOptions="FillAndExpand"/>
+                    HorizontalOptions="FillAndExpand"
+                    MapLongClicked="MyMap_MapLongClicked"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>
