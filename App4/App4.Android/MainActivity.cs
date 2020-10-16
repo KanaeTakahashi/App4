@@ -22,6 +22,9 @@ namespace App4.Droid
 
             // ゲオロケーターの設定
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
+
+            // FormsGoogleMapsの設定
+            Xamarin.FormsGoogleMaps.Init(this, savedInstanceState);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
