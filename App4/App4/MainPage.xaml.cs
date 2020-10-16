@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.Geolocator;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -41,6 +42,18 @@ namespace App4
         {
             var current = int.Parse(lblCount.Text);
             lblCount.Text = (current + 1).ToString();
+        }
+
+        /// <summary>
+        /// ゲオロケーターのチェック
+        /// </summary>
+        /// <returns></returns>
+        public bool IsLocationAvailable()
+        {
+            if (!CrossGeolocator.IsSupported)
+                return false;
+
+            return CrossGeolocator.Current.IsGeolocationAvailable;
         }
     }
 }
