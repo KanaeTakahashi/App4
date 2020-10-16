@@ -4,9 +4,13 @@
              x:Class="App4.BPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="ここはBページです"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="ここはBページです" />
+            <Button x:Name="btnPosition"
+                Text="位置情報を取得" />
+
+            <Label Text="位置情報を表示" />
+            <Editor x:Name="editPosition"
+                   AutoSize="TextChanges" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
