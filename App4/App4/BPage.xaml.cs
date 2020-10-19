@@ -19,7 +19,15 @@ namespace App4
             InitializeComponent();
 
             // イベントを紐づけ
+            btnNext.Clicked += BtnNext_Clicked;
             btnPosition.Clicked += async (sender, e) => { await GetPositionButton_ClickedAsync(sender, e); };
+        }
+
+        [Obsolete]
+        private void BtnNext_Clicked(object sender, EventArgs e)
+        {
+            // モーダレスで表示する場合
+            Navigation.PushAsync(new CPage());
         }
 
         /// <summary>
@@ -32,7 +40,8 @@ namespace App4
             if (!IsLocationAvailable()) return;
 
             var result = await GetCurrentPosition();
-            editPosition.Text = ProcessingForDisplay(result);
+            var pItem = new Models.Position(result);
+            editPosition.Text = pItem.ProcessingForDisplay();
             AddPosition(result);
         }
 
@@ -69,6 +78,10 @@ namespace App4
                 IsDraggable = true,
             };
             MyMap.Pins.Add(pin);
+
+            var pItem = new Models.Position(pin);
+
+            editPosition.Text = pItem.ProcessingForDisplay();
         }
 
         /// <summary>
@@ -93,7 +106,7 @@ namespace App4
             try
             {
                 var locator = CrossGeolocator.Current;
-                locator.DesiredAccuracy = 100;
+                locator.DesiredAccuracy = 50;
 
                 position = await locator.GetLastKnownLocationAsync();
 
@@ -119,22 +132,13 @@ namespace App4
             if (position == null)
                 return null;
 
-            Debug.WriteLine(ProcessingForDisplay(position));
+            var pItem = new Models.Position(position);
+            Debug.WriteLine(pItem.ProcessingForDisplay());
 
             return position;
         }
 
-        /// <summary>
-        /// 表示用に加工
-        /// </summary>
-        /// <param name="position"></param>
-        /// <returns></returns>
-        private static string ProcessingForDisplay(Plugin.Geolocator.Abstractions.Position position)
-        {
-            return string.Format("Time: {0} \nLat: {1} \nLong: {2} \nAltitude: {3} \nAltitude Accuracy: {4} \nAccuracy: {5} \nHeading: {6} \nSpeed: {7}",
-                    position.Timestamp, position.Latitude, position.Longitude,
-                    position.Altitude, position.AltitudeAccuracy, position.Accuracy, position.Heading, position.Speed);
-        }
+
 
         /// <summary>
         /// OnAppearingメソッド（Pageが表示される直前）
@@ -147,7 +151,7 @@ namespace App4
             try
             {
                 //高知駅へ移動させる
-                MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Xamarin.Forms.GoogleMaps.Position(33.5684, 133.5566), Distance.FromKilometers(100)));
+                MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Xamarin.Forms.GoogleMaps.Position(33.5684, 133.5566), Distance.FromKilometers(10)));
 
                 //ピンを立てる
                 var pin = new Pin()

@@ -9,12 +9,14 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="ここはBページです" />
+            <Button x:Name="btnNext"
+                Text="次のページへ" />
             <Button x:Name="btnPosition"
                 Text="位置情報を取得" />
 
             <Label Text="位置情報を表示" />
             <Editor x:Name="editPosition"
-                   AutoSize="TextChanges" />
+                   HeightRequest="100" />
             <Grid VerticalOptions="FillAndExpand"
                   HorizontalOptions="FillAndExpand"
                   BackgroundColor="Azure" >
