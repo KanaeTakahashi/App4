@@ -19,12 +19,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>MinimumOSVersion</key>
-	<string>13.4</string>
 	<key>CFBundleDisplayName</key>
 	<string>App4</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.companyname.App4</string>
+	<string>com.rasissoft.App4</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>UILaunchStoryboardName</key>
@@ -48,5 +46,7 @@
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<true/>
 	</dict>
+	<key>MinimumOSVersion</key>
+	<string>14.0</string>
 </dict>
 </plist>
