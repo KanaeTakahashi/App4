@@ -8,13 +8,13 @@
              x:Class="App4.BPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="ここはBページです" />
+            <Label Text="ここはBページです。現在の位置情報を表示します。" />
             <Button x:Name="btnNext"
-                Text="次のページへ" />
+                Text="次のページでテキストからグーグルマップで検索しますへ" />
             <Button x:Name="btnPosition"
                 Text="位置情報を取得" />
 
-            <Label Text="位置情報を表示" />
+            <Label Text="現在の位置情報を表示" />
             <Editor x:Name="editPosition"
                    HeightRequest="100" />
             <Grid VerticalOptions="FillAndExpand"

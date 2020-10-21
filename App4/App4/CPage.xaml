@@ -1,11 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:map="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              x:Class="App4.CPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="ここはCページです" />
-
+            <Label Text="ここはCページです。検索バーに入力されたテキストから検索し、グーグルマップで場所を表示します。" />
+            <SearchBar x:Name="searchBar" Placeholder="" />
+            <Grid VerticalOptions="FillAndExpand"
+                  HorizontalOptions="FillAndExpand"
+                  BackgroundColor="Azure" >
+                <map:Map x:Name="myMap"
+                    HasZoomEnabled="True"
+                    MapType="Street"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"/>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

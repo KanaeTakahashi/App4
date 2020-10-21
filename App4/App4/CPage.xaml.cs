@@ -13,14 +13,14 @@ namespace App4
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CPage : ContentPage
     {
-        /// <summary>
-        /// 検索条件入力コントロール。入力された値をイベントハンドラ内から取得するためメンバ変数に保持しておく
-        /// </summary>
-        private SearchBar searchBar;
-        /// <summary>
-        /// 地図コントロール。検索結果から該当地点へ移動などを行うためメンバ変数に保持しておく
-        /// </summary>
-        private Map map;
+        ///// <summary>
+        ///// 検索条件入力コントロール。入力された値をイベントハンドラ内から取得するためメンバ変数に保持しておく
+        ///// </summary>
+        //private SearchBar searchBar;
+        ///// <summary>
+        ///// 地図コントロール。検索結果から該当地点へ移動などを行うためメンバ変数に保持しておく
+        ///// </summary>
+        //private Map map;
         /// <summary>
         /// Geocoding処理は非同期で実施するため、ローカル変数ではなくメンバ変数に保持しておく
         /// </summary>
@@ -34,20 +34,22 @@ namespace App4
         {
             InitializeComponent();
 
-            // 検索バーと地図コントロールを作成し、StackLayoutへ設定する
-            searchBar = new SearchBar();
-            map = new Map { IsShowingUser = true };
-            var stack = new StackLayout();
-            stack.Children.Add(searchBar);
-            stack.Children.Add(map);
-            // ページコンテンツとしてStackLayoutを登録する
-            Content = stack;
+            // 画面のコンテントをコードで追加する方法 ここから
+            //// 検索バーと地図コントロールを作成し、StackLayoutへ設定する
+            //searchBar = new SearchBar();
+            //map = new Map { IsShowingUser = true };
+            //var stack = new StackLayout();
+            //stack.Children.Add(searchBar);
+            //stack.Children.Add(map);
+            //// ページコンテンツとしてStackLayoutを登録する
+            //Content = stack;
+            // 画面のコンテントをコードで追加する方法 ここまで
 
             // 検索バーへ検索イベントのイベントハンドラを設定する
             searchBar.SearchButtonPressed += OnSearchButtonPressed;
 
             //map.MapLongClicked += Map_MapLongClickedAsync; // 同期形式のイベント関連付けの書き方
-            map.MapLongClicked += async (sender, e) => { await Map_MapLongClickedAsync(sender, e); };
+            myMap.MapLongClicked += async (sender, e) => { await MyMap_MapLongClickedAsync(sender, e); };
         }
 
         /// <summary>
@@ -65,7 +67,7 @@ namespace App4
             if (position != null)
             {
                 // 該当地点へ移動する
-                map.MoveToRegion(
+                myMap.MoveToRegion(
                     MapSpan.FromCenterAndRadius(
                         position,
                         Distance.FromMiles(0.2)));
@@ -77,7 +79,7 @@ namespace App4
                 if (address != null)
                 {
                     // 以前設定したピンがあればピンを除去する
-                    map.Pins.Clear();
+                    myMap.Pins.Clear();
                     // 新たにピンを作成し地図へ登録する
                     var pin = new Pin
                     {
@@ -86,7 +88,7 @@ namespace App4
                         Label = searchBar.Text,             // ピンのラベル。検索条件を設定
                         Address = address.Replace("\n", "") // ピンの住所。取得した住所の先頭が「日本\n～」となるので改行を除去する
                     };
-                    map.Pins.Add(pin);
+                    myMap.Pins.Add(pin);
                 }
             }
         }
@@ -96,7 +98,7 @@ namespace App4
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async Task Map_MapLongClickedAsync(object sender, MapLongClickedEventArgs e)
+        private async Task MyMap_MapLongClickedAsync(object sender, MapLongClickedEventArgs e)
         {
             var position = new Position(e.Point.Latitude, e.Point.Longitude);
             // 座標から住所を逆引きする
@@ -107,7 +109,7 @@ namespace App4
             if (address != null)
             {
                 // 以前設定したピンがあればピンを除去する
-                map.Pins.Clear();
+                myMap.Pins.Clear();
                 // 新たにピンを作成し地図へ登録する
                 var pin = new Pin
                 {
@@ -116,11 +118,10 @@ namespace App4
                     Label = "追加の場所",  // ピンのラベル。検索条件を設定
                     Address = address.Replace("\n", "") // ピンの住所。取得した住所の先頭が「日本\n～」となるので改行を除去する
                 };
-                map.Pins.Add(pin);
+                myMap.Pins.Add(pin);
 
                 searchBar.Text = address.Replace("\n", "");
             }
-
         }
     }
 }
